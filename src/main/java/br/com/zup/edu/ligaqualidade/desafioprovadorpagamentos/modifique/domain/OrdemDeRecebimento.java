@@ -4,15 +4,31 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class OrdemDeRecebimento {
-    StatusRecebimento statusRecebimento;
-    BigDecimal valorOriginal;
-    BigDecimal valorASerRecebidoDeFato;
-    LocalDate dataEsperadoRecebimento;
+    private final StatusRecebimento status;
+    private final BigDecimal valorOriginal;
+    private final BigDecimal valorFinal;
+    private final LocalDate dataRecebimento;
 
-    public OrdemDeRecebimento(StatusRecebimento statusRecebimento, BigDecimal valorOriginal, BigDecimal valorASerRecebidoDeFato, LocalDate dataEsperadoRecebimento) {
-        this.statusRecebimento = statusRecebimento;
+    public OrdemDeRecebimento(StatusRecebimento status, BigDecimal valorOriginal, BigDecimal valorASerRecebidoDeFato, LocalDate dataEsperadoRecebimento) {
+        this.status = status;
         this.valorOriginal = valorOriginal;
-        this.valorASerRecebidoDeFato = valorASerRecebidoDeFato;
-        this.dataEsperadoRecebimento = dataEsperadoRecebimento;
+        this.valorFinal = valorASerRecebidoDeFato;
+        this.dataRecebimento = dataEsperadoRecebimento;
+    }
+
+    public StatusRecebimento getStatus() {
+        return status;
+    }
+
+    public BigDecimal getValorOriginal() {
+        return valorOriginal;
+    }
+
+    public BigDecimal getValorFinal() {
+        return valorFinal;
+    }
+
+    public LocalDate getDataRecebimento() {
+        return dataRecebimento;
     }
 }
