@@ -1,8 +1,8 @@
 package br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique;
 
+import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.domain.OrdemDeRecebimento;
 import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.parser.DadosAdiantamentoParser;
 import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.parser.DadosTrasacaoParser;
-import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.domain.OrdemDeRecebimento;
 import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.parser.OrdemDeRecebimentoMessageParser;
 import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.transacoes.OrdemDeRecebimentoService;
 import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.pronto.DadosRecebimentoAdiantado;
@@ -46,9 +46,6 @@ public class Solucao {
 				.parseAndMapByIdTransacao(infoAdiantamentos);
 		final List<OrdemDeRecebimento> ordensDeRecebimento = new OrdemDeRecebimentoService().calcula(transacoes, adiantamentosByIdTransacao);
 		return new OrdemDeRecebimentoMessageParser().parse(ordensDeRecebimento);
-//		return List.of(new String[][] {
-//					 {"pago","200","194","04/03/2021"}
-//					});
 	}
 
 }
