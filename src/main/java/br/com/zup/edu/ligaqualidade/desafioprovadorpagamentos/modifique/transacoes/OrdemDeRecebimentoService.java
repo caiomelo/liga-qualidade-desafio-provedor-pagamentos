@@ -18,7 +18,11 @@ public class OrdemDeRecebimentoService {
 
         for (DadosTransacao dadosTransacao : transacoes) {
             DadosRecebimentoAdiantado adiantamento = Optional.ofNullable(adiantamentos.get(dadosTransacao.id)).orElse(null);
-            listaOrdemRecebimento.add(calculator.calculaOrdemRecebimento(dadosTransacao, adiantamento));
+            if (adiantamento == null) {
+                listaOrdemRecebimento.add(calculator.calculaOrdemRecebimento(dadosTransacao));
+            } else {
+                listaOrdemRecebimento.add(calculator.calculaOrdemRecebimento(dadosTransacao, adiantamento));
+            }
         }
 
         return listaOrdemRecebimento;

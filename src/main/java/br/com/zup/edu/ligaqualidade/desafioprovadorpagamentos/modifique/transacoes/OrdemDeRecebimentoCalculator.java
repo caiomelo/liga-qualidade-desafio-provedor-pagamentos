@@ -20,23 +20,27 @@ public class OrdemDeRecebimentoCalculator {
                 MetodoPagamento.CREDITO, new TransacaoCreditoCalculator());
     }
 
-    OrdemDeRecebimento calculaOrdemRecebimento(final DadosTransacao transacao, final DadosRecebimentoAdiantado adiantamento) {
+    public OrdemDeRecebimento calculaOrdemRecebimento(final DadosTransacao transacao, final DadosRecebimentoAdiantado adiantamento) {
         TransacaoCalculator calculator = calculators.get(transacao.metodo);
-        BigDecimal valorTransacao = calculator.descontaTaxaTransacao(transacao.valor);
-        LocalDate dataRecebimento = calculator.calculaDataRecebimento(LocalDate.now());
-        StatusRecebimento status = calculator.statusRecebimento();
 
-        if (adiantamento != null) {
-            valorTransacao = valorTransacao.subtract(valorTransacao.multiply(adiantamento.taxa));
-            dataRecebimento = LocalDate.now();
-            status = StatusRecebimento.PAGO;
-        }
+        BigDecimal valorTransacao = calculator.descontaTaxaTransacao(transacao.valor);
+        valorTransacao = valorTransacao.subtract(valorTransacao.multiply(adiantamento.taxa));
 
         return new OrdemDeRecebimento(
-                status,
+                StatusRecebimento.PAGO,
                 transacao.valor,
                 valorTransacao,
-                dataRecebimento
+                LocalDate.now()
+        );
+    }
+
+    public OrdemDeRecebimento calculaOrdemRecebimento(final DadosTransacao transacao) {
+        TransacaoCalculator calculator = calculators.get(transacao.metodo);
+        return new OrdemDeRecebimento(
+                calculator.statusRecebimento(),
+                transacao.valor,
+                calculator.descontaTaxaTransacao(transacao.valor),
+                calculator.calculaDataRecebimento(LocalDate.now())
         );
     }
 }
