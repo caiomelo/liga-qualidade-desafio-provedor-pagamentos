@@ -11,7 +11,7 @@ public class TransacaoCreditoCalculator implements TransacaoCalculator {
 
     @Override
     public StatusRecebimento statusRecebimento() {
-        return StatusRecebimento.AGUARDANDO_LIBERACAO_FUNDOS;
+        return StatusRecebimento.AGUARDANDO_PAGAMENTO;
     }
 
     @Override
