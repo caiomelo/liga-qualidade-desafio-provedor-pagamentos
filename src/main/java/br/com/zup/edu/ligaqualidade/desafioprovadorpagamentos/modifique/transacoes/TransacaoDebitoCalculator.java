@@ -5,13 +5,13 @@ import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.domain.S
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CartaoDebito implements Cartao {
+public class TransacaoDebitoCalculator implements TransacaoCalculator {
 
-    private static final double VALOR_TAXA = 0.03;
+    private static final BigDecimal VALOR_TAXA = new BigDecimal("0.03");
 
     @Override
     public StatusRecebimento statusRecebimento() {
-        return StatusRecebimento.AGUARDANDO_PAGAMENTO;
+        return StatusRecebimento.PAGO;
     }
 
     @Override
@@ -20,9 +20,8 @@ public class CartaoDebito implements Cartao {
     }
 
     @Override
-    public BigDecimal calculaValorRecebimentoDescontandoTaxaTransacao(BigDecimal valorCompra) {
-        var valorTaxa  = valorCompra.multiply(new BigDecimal(VALOR_TAXA));
-        return valorCompra.subtract(valorTaxa);
+    public BigDecimal descontaTaxaTransacao(BigDecimal valorCompra) {
+        return valorCompra.subtract(valorCompra.multiply(VALOR_TAXA));
     }
 
 

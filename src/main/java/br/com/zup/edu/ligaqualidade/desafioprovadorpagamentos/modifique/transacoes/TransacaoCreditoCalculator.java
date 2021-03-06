@@ -5,24 +5,22 @@ import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.domain.S
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CartaoCredito implements Cartao {
+public class TransacaoCreditoCalculator implements TransacaoCalculator {
 
-    private static final double VALOR_TAXA = 0.05;
+    private static final BigDecimal VALOR_TAXA = new BigDecimal("0.05");
 
     @Override
     public StatusRecebimento statusRecebimento() {
-        return StatusRecebimento.PAGO;
+        return StatusRecebimento.AGUARDANDO_LIBERACAO_FUNDOS;
     }
 
     @Override
     public LocalDate calculaDataRecebimento(LocalDate dataTransacao) {
-
         return dataTransacao.plusDays(30);
     }
 
     @Override
-    public BigDecimal calculaValorRecebimentoDescontandoTaxaTransacao(BigDecimal valorCompra) {
-        var valorTaxa  = valorCompra.multiply(new BigDecimal(VALOR_TAXA));
-        return valorCompra.subtract(valorTaxa);
+    public BigDecimal descontaTaxaTransacao(BigDecimal valorCompra) {
+        return valorCompra.subtract(valorCompra.multiply(VALOR_TAXA));
     }
 }

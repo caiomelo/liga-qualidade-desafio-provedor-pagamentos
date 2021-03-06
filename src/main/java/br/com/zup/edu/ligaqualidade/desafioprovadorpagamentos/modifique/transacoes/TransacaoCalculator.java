@@ -5,11 +5,11 @@ import br.com.zup.edu.ligaqualidade.desafioprovadorpagamentos.modifique.domain.S
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public interface Cartao {
+public interface TransacaoCalculator {
 
     StatusRecebimento statusRecebimento();
 
     LocalDate calculaDataRecebimento(LocalDate dataTransacao);
 
-    BigDecimal calculaValorRecebimentoDescontandoTaxaTransacao(BigDecimal valorCompra);
+    BigDecimal descontaTaxaTransacao(BigDecimal valorCompra);
 }
